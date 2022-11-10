@@ -1,0 +1,53 @@
+Compile-Time Polymorphism:
+--------------------------
+This type of polymorphism is achieved 
+by function overloading or operator overloading.
+
+code:
+-----
+#include<iostream>
+using namespace std;
+class math{
+public:
+  int add(int a,int b){
+    return a+b;
+  }
+
+  int add(int a,int b,int c){
+    return a+b+c;
+  }
+
+  int add(int a,double b){
+    return a+b;
+  }
+};
+
+int main(){
+  math m;
+  cout << m.add(10,20);
+  cout << endl;
+  cout << m.add(10,5.1);
+}
+
+overriding:
+---------
+#include<iostream>
+using namespace std;
+class Animal{
+  public:
+  void speak(){
+    cout<<"Animal is speaking"<< endl;
+  }
+};
+
+class Dog : public Animal{
+public:
+  void speak(){
+    cout<<"Dog is barking"<<endl;
+  }
+};
+
+int main(){
+  Dog d;
+  d.speak();
+}

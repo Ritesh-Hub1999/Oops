@@ -1,4 +1,4 @@
-Compile-Time Polymorphism:
+Compile-Time Polymorphism/Static/Early binding:
 --------------------------
 This type of polymorphism is achieved 
 by function overloading or operator overloading.
@@ -29,25 +29,73 @@ int main(){
   cout << m.add(10,5.1);
 }
 
-overriding:
----------
+overriding/Dynamic/Late Binding:
+--------------------
 #include<iostream>
 using namespace std;
+
 class Animal{
-  public:
-  void speak(){
-    cout<<"Animal is speaking"<< endl;
+public:
+  int age;
+  int weight;
+
+  void Speak(){
+    cout<<"Animal is Barking"<<endl;
   }
 };
 
-class Dog : public Animal{
+class Human{
 public:
   void speak(){
-    cout<<"Dog is barking"<<endl;
+    cout<<"Human is speaking"<<endl;
   }
 };
 
 int main(){
-  Dog d;
-  d.speak();
+  Human obj1;
+  obj1.speak();
+}
+
+virtual keyword sa bhi achive kr skta hai
+Dynamic poly
+-------------------------
+#include <iostream>
+
+using namespace std;
+
+// define a base class bird
+
+class bird {
+public:
+    // virtual function
+    virtual void display(){
+        cout << "This is display in bird class." << "\n\n";
+    }
+
+    void print(){
+        cout << "This is show in bird class." << "\n\n";
+    }
+};
+
+// define a child class parrot
+
+class parrot : public bird {
+public:
+    void display(){
+        cout << "This is display in parrot class." << "\n\n";
+    }
+    void print(){
+      cout << "This is show in parrot class." << "\n\n";
+    }
+};
+
+int main(){
+    // create a reference of class bird
+    bird* brd;
+    parrot p;
+    brd = &p;
+    // this will call the virtual function
+    brd->display();
+    // this will call the non-virtual function
+    brd->print();
 }

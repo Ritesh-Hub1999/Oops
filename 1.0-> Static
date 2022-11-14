@@ -1,0 +1,29 @@
+//static keyword
+
+Static keyword it create a data member 
+that belongs to class.
+for accessing the data memeber we don't need
+to create an object.
+
+we dont need to create the object for the
+static function.
+this keyword inka pass nai hota.qki
+this key word curr object ka address hold
+karta hai and we don't need to create object 
+for static DM or DF
+
+class Hero{
+
+public:
+  int lvl;
+  static int timeToComplete;
+
+  static int getTimeToComplete(){
+    return timeToComplete;
+  }
+};
+
+int Hero::timeToComplete = 5;
+int main(){
+  cout<<Hero::getTimeToComplete();
+}

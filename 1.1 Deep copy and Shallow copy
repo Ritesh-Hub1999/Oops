@@ -1,21 +1,30 @@
 Shallow Copy:
 -------
-In shallow copy, an object is created by simply
-copying the data of all variables of the original 
-object. This works well if none of the variables 
-of the object are defined in the heap section of 
-memory. If some variables are dynamically allocated
-memory from heap section, then the copied object 
-variable will also reference the same memory location.
-This will create ambiguity and run-time errors, 
-dangling pointer. Since both objects will reference 
-to the same memory location, then change made by one 
-will reflect those change in another object as well. 
+Here we are accessing the same memory.
+Default copy constructor do the shallow
+copy.
+In shallow copy, an object is created by
+simply copying the data of all variables
+of the original object. This works well
+if none of the variables of the object 
+are defined in the heap section of memory.
+If some variables are dynamically allocated
+memory from heap section, then the copied 
+object variable will also reference the same
+memory location.This will create ambiguity 
+and run-time errors,dangling pointer. Since
+both objects will reference to the same memory
+location, then change made by one will reflect
+those change in another object as well. 
 Since we wanted to create a replica of the object, 
 this purpose will not be filled by Shallow copy. 
 
  Deep Copy:
  --------
+ Here we create the copy of the Data Member
+ we need to explicitly
+define the copy constructor and assign dynamic
+memory as well
 In Deep copy, an object is created by 
 copying data of all variables, and it
 also allocates similar memory resources
@@ -28,138 +37,187 @@ the other constructors, as well.
 
 Shallow Copy Code:
 -----
-#include <iostream>
-using namespace std;
- 
-// Box Class
-class box {
-private:
-    int length;
-    int breadth;
-    int height;
- 
-public:
-    // Function that sets the dimensions
-    void set_dimensions(int length1, int breadth1,
-                        int height1)
-    {
-        length = length1;
-        breadth = breadth1;
-        height = height1;
-    }
- 
-    // Function to display the dimensions
-    // of the Box object
-    void show_data()
-    {
-        cout << " Length = " << length
-             << "\n Breadth = " << breadth
-             << "\n Height = " << height
-             << endl;
-    }
-};
- 
-// Driver Code
-int main()
-{
-    // Object of class Box
-    box B1, B3;
- 
-    // Set dimensions of Box B1
-    B1.set_dimensions(14, 12, 16);
-    B1.show_data();
- 
-    // When copying the data of object
-    // at the time of initialization
-    // then copy is made through
-    // COPY CONSTRUCTOR
-    box B2 = B1;
-    B2.show_data();
- 
-    // When copying the data of object
-    // after initialization then the
-    // copy is done through DEFAULT
-    // ASSIGNMENT OPERATOR
-    B3 = B1;
-    B3.show_data();
- 
-    return 0;
- }
- 
+//yaha pa humna hero 1 ka hi name chage
+kia tha and hero 2 ka bhi name 
+change hogaya haiyahi hai shallow copy.
 
-   #include <iostream>
+#include<iostream>
+#include <cstring>
 using namespace std;
- 
-// Box Class
-class box {
-private:
-    int length;
-    int* breadth;
-    int height;
- 
-public:
-    // Constructor
-    box()
-    {
-        breadth = new int;
+
+class Hero {
+    
+    //properties
+    private:
+    int health;
+
+    public:
+    char *name;
+    char level;
+    static int timeToComplete;
+
+    Hero() {
+        cout << "Simple constructor called" << endl;
+        name = new char[100];
     }
- 
-    // Function to set the dimensions
-    // of the Box
-    void set_dimension(int len, int brea,
-                       int heig)
-    {
-        length = len;
-        *breadth = brea;
-        height = heig;
+
+    //Paramerterised Constructor
+    Hero(int health) {
+        this -> health = health;
     }
- 
-    // Function to show the dimensions
-    // of the Box
-    void show_data()
-    {
-        cout << " Length = " << length
-             << "\n Breadth = " << *breadth
-             << "\n Height = " << height
-             << endl;
+
+    Hero(int health, char level) {
+        this -> level = level;
+        this -> health = health;
     }
- 
-    // Parameterized Constructors for
-    // for implementing deep copy
-    box(box& sample)
-    {
-        length = sample.length;
-        breadth = new int;
-        *breadth = *(sample.breadth);
-        height = sample.height;
+
+    void print(){
+        cout << endl;
+        cout << "[ Name: " << this->name<< " ,";
+        cout << "health: " << this->health << " ,";
+        cout <<"level: " << this->level << " ]";
+        cout << endl << endl;
     }
- 
-    // Destructors
-    ~box()
-    {
-        delete breadth;
+
+    int getHealth() {
+        return health;
+    }
+
+    char getLevel() {
+        return level;
+    }
+
+    void setHealth(int h) {
+        health = h;
+    }
+
+    void setLevel(char ch) {
+        level = ch;
+    }
+
+    void setName(char name[]) {
+        strcpy(this->name, name);
     }
 };
- 
-// Driver Code
-int main()
-{
-    // Object of class first
-    box first;
- 
-    // Set the dimensions
-    first.set_dimension(12, 14, 16);
- 
-    // Display the dimensions
-    first.show_data();
- 
-    // When the data will be copied then
-    // all the resources will also get
-    // allocated to the new object
-    box second = first;
- 
-    // Display the dimensions
-    second.show_data();
- 
+
+
+int main(){
+    Hero hero1;
+
+    hero1.setHealth(12);
+    hero1.setLevel('D');
+    char name[7] = "Ritesh";
+    hero1.setName(name);
+
+    hero1.print();
+
+    //use default copy constructor
+    Hero hero2(hero1);
+    hero2.print();
+
+    hero1.name[0]='J';
+    hero1.print();
+    hero2.print();
+  
     return 0;
 }
+
+ 
+Deep Copy:
+----------
+//deep copy ka case mai new array banaya
+
+#include<iostream>
+#include <cstring>
+using namespace std;
+
+class Hero {
+    
+    //properties
+    private:
+    int health;
+
+    public:
+    char *name;
+    char level;
+    static int timeToComplete;
+
+    Hero() {
+        cout << "Simple constructor called" << endl;
+        name = new char[100];
+    }
+
+    //Paramerterised Constructor
+    Hero(int health) {
+        this -> health = health;
+    }
+
+    Hero(int health, char level) {
+        this -> level = level;
+        this -> health = health;
+    }
+
+    void print(){
+        cout << endl;
+        cout << "[ Name: " << this->name<< " ,";
+        cout << "health: " << this->health << " ,";
+        cout <<"level: " << this->level << " ]";
+        cout << endl << endl;
+    }
+
+//creating Deep copy
+  //copy constructor
+    Hero(Hero& temp) {
+
+        char *ch = new char[strlen(temp.name) + 1];
+        strcpy(ch, temp.name);
+        this->name = ch;
+
+        cout << "Copy constructor called" << endl;
+        this->health = temp.health;
+        this->level = temp.level;
+    }
+
+    int getHealth() {
+        return health;
+    }
+
+    char getLevel() {
+        return level;
+    }
+
+    void setHealth(int h) {
+        health = h;
+    }
+
+    void setLevel(char ch) {
+        level = ch;
+    }
+
+    void setName(char name[]) {
+        strcpy(this->name, name);
+    }
+};
+
+
+int main(){
+    Hero hero1;
+
+    hero1.setHealth(12);
+    hero1.setLevel('D');
+    char name[7] = "Ritesh";
+    hero1.setName(name);
+
+    hero1.print();
+
+    //use default copy constructor
+    Hero hero2(hero1);
+    hero2.print();
+
+    hero1.name[0]='J';
+    hero1.print();
+    hero2.print();
+  
+    return 0;
+}
+

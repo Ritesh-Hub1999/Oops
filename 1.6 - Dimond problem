@@ -1,0 +1,58 @@
+With the help of virtual keyword
+we can remove the amiguity. The 
+virtual key word do the disinheritance.
+so, A will become virtual base class of
+class D.
+
+by doing using virual keyhword.
+
+step1: when D class don't find Func1 it will
+        go to B class. But it will not go to 
+        A class from B. due to disinheritance
+        
+step2: when D class don't find Func1 it will
+        go to C class. But it will not go to 
+        A class from C. due to disinheritance
+        
+step 3: than i will directly check on A class.
+        
+
+#include <iostream>
+#include <cstring>
+using namespace std;
+
+class A{
+public:
+  void func1(){
+    cout<<"calling function 1"<<endl;
+  }
+};
+
+class B:virtual public A{
+public:
+  void func2(){
+    cout<<"calling function 2"<<endl;
+  }
+};
+
+class C:virtual public A{
+public:
+  void func3(){
+    cout<<"calling function 3"<<endl;
+  }
+};
+
+class D:public B,public C{
+public:
+  void func4(){
+    cout<<"calling function 4"<<endl;
+  }
+};
+
+int main(){
+  D obj;
+  obj.func4();
+  obj.func3();
+  obj.func2();
+  obj.func1();
+}

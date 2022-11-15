@@ -1,0 +1,65 @@
+#include<iostream>
+Using namespace std;
+class factory {
+Protected: 
+	float area;
+};
+
+class Rectangle: public factory {
+	Protected:
+	float length, breadth;
+Public:
+Void get(){
+Cin>> length;
+Cin>> breadth;
+}
+
+Double Area(){
+area = length*breadth;
+return area;
+}
+};
+
+class Circle: public factory{
+Protected:
+float radius;
+public:
+void get(){
+cin>> radius;
+}
+double Area(){
+area = 3.14 *radius* radius;
+return area;
+}
+};
+class square: public factory{
+Protected:
+float side;
+
+public:
+void get(){
+cin>> side;
+}
+double Area(){
+area =side* side;
+return area;
+}
+};
+
+Int main(){
+Circle C;
+float circle;
+C.get();
+circle = C.Area();
+cout<<”Area of circle” << circle<<endl;
+Rectangle R;
+float rectangle;
+R.get();
+rectangle = R.Area();
+Cout<<”Area of rectangle is” << rectangle<<endl;
+Square S;
+float square;
+S.get();
+square = S.Area();
+cout<<”Area of square is”<<square<<endl;
+}

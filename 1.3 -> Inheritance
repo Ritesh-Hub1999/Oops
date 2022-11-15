@@ -32,7 +32,7 @@ int main(){
 
 }
 
-Multiple inheritance
+Multilevel inheritance
 ----------------------
 #include<iostream>
 using namespace std;
@@ -63,7 +63,7 @@ int main(){
   l.speak();
 }
 
-Multilevel Inheritance:
+Multiple Inheritance:
 ----------------------
 #include<iostream>
 using namespace std;

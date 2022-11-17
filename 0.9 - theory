@@ -23,3 +23,11 @@ What is static keyword in C++?
 The static keyword belongs to the class. for calling the
 static DM or DF we don't need to create the object.
 Static function can access static DM only.
+
+
+What is inline function?
+       --------
+An inline function is one for which the compiler copies
+the code from the function definition directly into the
+code of the calling function rather than creating a 
+separate set of instructions in memory.

@@ -9,6 +9,8 @@ a pure specifier ( = 0 ) in the declaration
 of a virtual member function in the class declaration.
 
 Pure virtual function-> do nothing func
+-------------------
+It is use to create an abstract class.
 
 What is a virtual function in C++?
           -----------------
@@ -16,6 +18,12 @@ A virtual function in C++ is a base class member
 function that you can redefine in a derived 
 class to achieve polymorphism. You can declare
 the function in the base class using the virtual keyword
+
+What is virtual keyword?
+       ---------
+The virtual keyword is used to modify a method, 
+property, indexer, or event declaration and allow 
+for it to be overridden in a derived class.
 
 What is static keyword in C++?
         --------------

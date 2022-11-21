@@ -22,8 +22,7 @@ the function in the base class using the virtual keyword
 What is virtual keyword?
        ---------
 The virtual keyword is used to modify a method, 
-property, indexer, or event declaration and allow 
-for it to be overridden in a derived class.
+allow it to be overridden in a derived class.
 
 What is static keyword in C++?
         --------------

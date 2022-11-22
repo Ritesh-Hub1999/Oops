@@ -14,8 +14,8 @@ It is use to create an abstract class.
 
 What is a virtual function in C++?
           -----------------
-A virtual function in C++ is a base class member
-function that you can redefine in a derived 
+A virtual function is a base class memberfunction
+that you can redefine in a derived 
 class to achieve polymorphism. You can declare
 the function in the base class using the virtual keyword
 

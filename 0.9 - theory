@@ -24,6 +24,20 @@ What is virtual keyword?
 The virtual keyword is used to modify a method, 
 allow it to be overridden in a derived class.
 
+vTable:
+-------
+It is a table that contains the memory addresses
+of all virtual functions of a class in the order
+in which they are declared in a class. This table
+is used to resolve function calls in dynamic/late
+binding manner.
+
+vPTR:
+-----
+When you create an object of a class which contains
+virtual function then a hidden pointer gets created
+automatically in that object by the compiler.
+
 What is static keyword in C++?
         --------------
         

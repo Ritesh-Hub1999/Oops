@@ -48,7 +48,8 @@ Static function can access static DM only.
 
 What is inline function?
        --------
-An inline function is one for which the compiler copies
-the code from the function definition directly into the
-code of the calling function rather than creating a 
-separate set of instructions in memory.
+An inline function is the compiler copies
+the code from the function definition directly
+into the code of the calling function rather
+than creating a separate set of instructions
+in memory.

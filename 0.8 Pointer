@@ -1,0 +1,56 @@
+Void Pointer:-
+-----------
+Void pointers are also known as generic
+pointers. These pointers can be used to
+point to the memory address of any variable
+of any data type.
+for derefrencing the void pointer we need
+to typecast.
+
+Example:
+--------
+#include <stdio.h>  
+int main()  
+{  
+    int i=15;  
+    void *ptr;
+    ptr=&i;  
+    printf("%d",*(int*)ptr);
+    return 0;  
+}
+
+Dangling Pointer:
+----------------
+dangling pointer is a pointer that points
+to an invalid memory or a memory that
+has been freed up.
+
+Code:
+----
+#include<stdio.h>  
+int main()  
+{  
+   int *ptr=(int *)malloc(sizeof(int));  
+   ......
+   ......
+   ......
+   free(ptr);  // After free call, ptr becomes a dangling pointer
+   ptr=NULL;   // the pointer ptr is not dangling anymore as it is pointing to nothing
+   return 0;  
+}
+
+NULL Pointer:
+-----------
+The Null pointer is a pointer that
+is initialized with a Null value
+at the time of pointer declaration.
+
+Code:
+----
+#include<stdio.h>
+int main()
+{
+   int *ptr=NULL;
+   printf("The value of ptr is: %d\n",ptr);
+   return 0;
+}

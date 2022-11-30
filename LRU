@@ -1,1 +1,108 @@
 https://leetcode.com/problems/lru-cache/
+
+Constructor: store the cache capacity
+
+get : we will get the correcponting value
+      in cache
+      
+put : which value we need to save in 
+      corresponding to key
+      
+
+
+code:
+-----
+class LRUCache {
+public:
+    //using for storing key value pair
+    map<int,int> m;
+    
+    //storing the address so that we
+    //don't iterate in the list for
+    //finding the key
+    
+    map<int,list<int>::iterator> address;
+    list<int> l;
+    int cap;
+    int size;
+    LRUCache(int capacity) {
+        cap = capacity;
+        size = 0;
+    }
+    
+    int get(int key) {
+        //if we didn't find key return -1
+        if(m.find(key)==m.end()){
+            return -1;
+        }
+        
+        //agr key mila hama usa node ka aga
+        lana hoga
+        
+        else{
+            //here we are finding address
+            
+            int ans = m[key];
+            list<int>::iterator it = address[key];
+
+            //we need to delete the node from list 
+            //where it is present and put it in start
+            
+            l.erase(it);
+
+            //delete key from address map as well
+             
+            address.erase(key);
+
+            //push it front
+
+            l.push_front(key);
+
+            //put the front node address in address
+            //map
+
+            address[key] = l.begin();
+
+            return ans;
+        }
+    }
+    
+    void put(int key, int value) {
+        
+        //if key already exist than we need
+        //to erase it
+
+        if(m.find(key) != m.end()){
+            l.erase(address[key]);
+            address.erase(key);
+            m.erase(key);
+            size--;
+        }
+
+        //we need to check if capacity is full
+        //or not
+        //if full we need to delete last data 
+        //of list
+
+        if(size == cap){
+            int lastKey = l.back();
+            l.pop_back();
+            address.erase(lastKey);
+            m.erase(lastKey);
+            size--;
+        }
+        
+        //we need to put the new value in front
+        size++;
+        l.push_front(key);
+        address[key] = l.begin();
+        m[key] = value;
+    }
+};
+
+/**
+ * Your LRUCache object will be instantiated and called as such:
+ * LRUCache* obj = new LRUCache(capacity);
+ * int param_1 = obj->get(key);
+ * obj->put(key,value);
+ */

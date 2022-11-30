@@ -53,3 +53,16 @@ the code from the function definition directly
 into the code of the calling function rather
 than creating a separate set of instructions
 in memory.
+
+Code:
+-----#include <iostream>
+using namespace std;
+inline int cube(int s)
+{
+    return s*s*s;
+}
+int main()
+{
+    cout << "The cube of 3 is: " << cube(3) << "\n";
+    return 0;
+} //Output: The cube of 3 is: 27

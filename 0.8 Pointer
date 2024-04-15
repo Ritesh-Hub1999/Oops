@@ -21,9 +21,10 @@ int main()
 
 Dangling Pointer:
 ----------------
-dangling pointer is a pointer that points
-to an invalid memory or a memory that
-has been freed up.
+A pointer pointing to a memory
+location that has been deleted
+(or freed) is called a dangling
+pointer
 
 Code:
 ----
@@ -31,9 +32,6 @@ Code:
 int main()  
 {  
    int *ptr=(int *)malloc(sizeof(int));  
-   ......
-   ......
-   ......
    free(ptr);  // After free call, ptr becomes a dangling pointer
    ptr=NULL;   // the pointer ptr is not dangling anymore as it is pointing to nothing
    return 0;  

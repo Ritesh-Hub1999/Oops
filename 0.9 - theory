@@ -54,6 +54,23 @@ destructors, and can be overloaded for custom
 memory management. It provides better type safety 
 and error handling through exceptions.
 
+Lambda:
+------
+Lambda expressions provide a way to define
+anonymous function objects directly in your code. 
+They are useful for creating short, inline functions.
+Ex:
+
+#include <iostream>
+
+int main() {
+    auto add = [](int a, int b) -> int {
+        return a + b;
+    };
+    std::cout << "5 + 3 = " << add(5, 3) << std::endl;
+    return 0;
+}
+
 What is an abstract class in C++?
           -----------------
 An abstract class is a class that is 

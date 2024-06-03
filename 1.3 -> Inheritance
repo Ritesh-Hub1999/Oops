@@ -161,6 +161,8 @@ int main()
 }
 
 Inhertitance ambiguity:
+
+For overcome this ambiguity we need use scope revolution
 ----------------------
 #include<iostream>
 using namespace std;

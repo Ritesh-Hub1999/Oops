@@ -1,9 +1,11 @@
-Types Of Inheritance:-
+ Types Of Inheritance:-
 1 -> Single inheritance
 2 -> Multilevel inheritance
 3 -> Multiple inheritance
 4 -> Hierarchical inheritance
 5 -> Hybrid inheritance
+
+Base clasx constructor call first ay per child class
 
 Single inheritance code:
 ------------------------

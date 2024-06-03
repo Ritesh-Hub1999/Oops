@@ -52,3 +52,85 @@ int main()
    printf("The value of ptr is: %d\n",ptr);
    return 0;
 }
+
+Smart Pointer:
+-----------
+Smart pointers help manage dynamic memory and 
+other resources more safely and efficiently 
+than traditional raw pointers.Smart pointers 
+ensure that resources are properly cleaned up
+when they are no longer needed, preventing issues
+like memory leaks and dangling pointers.
+
+unique_ptr: 
+ Use for sole ownership of a resource. It ensures
+that the resource is deleted when the 
+std::unique_ptr goes out of scope.Cannot be copied, only moved.
+
+Ex:#include <iostream>
+#include <memory>
+
+class MyClass {
+public:
+    MyClass() { std::cout << "MyClass constructed\n"; }
+    ~MyClass() { std::cout << "MyClass destructed\n"; }
+};
+
+int main() {
+    std::unique_ptr<MyClass> ptr1 = std::make_unique<MyClass>(); // Allocates and owns MyClass
+    // std::unique_ptr<MyClass> ptr2 = ptr1; // Error: cannot copy unique_ptr
+    std::unique_ptr<MyClass> ptr2 = std::move(ptr1); // Transfers ownership to ptr2
+    return 0; // MyClass is destructed when ptr2 goes out of scope
+}
+
+shared_ptr:
+Use for shared ownership of a resource, with automatic 
+reference counting to ensure the resource is deleted 
+when the last std::shared_ptr goes out of scope.
+Can be copied,
+
+#include <iostream>
+#include <memory>
+
+class MyClass {
+public:
+    MyClass() { std::cout << "MyClass constructed\n"; }
+    ~MyClass() { std::cout << "MyClass destructed\n"; }
+};
+
+int main() {
+    std::shared_ptr<MyClass> ptr1 = std::make_shared<MyClass>(); // Allocates and owns MyClass
+    {
+        std::shared_ptr<MyClass> ptr2 = ptr1; // Shared ownership with ptr1
+        std::cout << "Shared ownership count: " << ptr1.use_count() << '\n'; // Prints 2
+    }
+    std::cout << "Shared ownership count: " << ptr1.use_count() << '\n'; // Prints 1
+    return 0; // MyClass is destructed when the last shared_ptr (ptr1) goes out of scope
+}
+
+weak_ptr:
+Use to hold a non-owning reference to an 
+object managed by std::shared_ptr, 
+preventing circular references.
+
+#include <iostream>
+#include <memory>
+
+class MyClass {
+public:
+    std::shared_ptr<MyClass> other;
+    ~MyClass() { std::cout << "MyClass destructed\n"; }
+};
+
+int main() {
+    std::shared_ptr<MyClass> ptr1 = std::make_shared<MyClass>();
+    std::shared_ptr<MyClass> ptr2 = std::make_shared<MyClass>();
+
+    ptr1->other = ptr2;
+    ptr2->other = ptr1; // Circular reference with shared_ptr would cause a memory leak
+
+    // Instead, use weak_ptr to avoid circular reference
+    ptr1->other = std::weak_ptr<MyClass>(ptr2);
+    ptr2->other = std::weak_ptr<MyClass>(ptr1);
+    return 0; // Both MyClass instances are destructed correctly
+}

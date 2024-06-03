@@ -1,3 +1,59 @@
+Tempelate:
+---------
+Templates provide a mechanism for writing generic,
+type-safe, and efficient code. They enhance code
+reusability by allowing the same code to work with
+different types
+
+Ex: Function
+#include <iostream>
+
+// Function template
+template <typename T>
+T add(T a, T b) {
+    return a + b;
+}
+
+int main() {
+    std::cout << add(3, 4) << std::endl;         // Outputs 7 (int)
+    std::cout << add(3.5, 4.5) << std::endl;     // Outputs 8.0 (double)
+    return 0;
+}
+
+EX: class
+#include <iostream>
+
+// Class template
+template <typename T>
+class MyClass {
+private:
+    T data;
+public:
+    MyClass(T data) : data(data) {}
+    T getData() { return data; }
+};
+
+int main() {
+    MyClass<int> intObj(5);
+    MyClass<double> doubleObj(5.5);
+
+    std::cout << intObj.getData() << std::endl;       // Outputs 5
+    std::cout << doubleObj.getData() << std::endl;    // Outputs 5.5
+    return 0;
+}
+
+New and Malloc:
+--------------
+malloc: is a C function that allocates raw,
+uninitialized memory and requires explicit
+type casting and deallocation using free.
+
+new :is a C++ operator that allocates and 
+initializes memory, calls constructors and 
+destructors, and can be overloaded for custom
+memory management. It provides better type safety 
+and error handling through exceptions.
+
 What is an abstract class in C++?
           -----------------
 An abstract class is a class that is 
@@ -44,7 +100,6 @@ What is static keyword in C++?
 The static keyword belongs to the class. for calling the
 static DM or DF we don't need to create the object.
 Static function can access static DM only.
-
 
 What is inline function?
        --------

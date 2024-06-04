@@ -1,0 +1,42 @@
+Singleton Pattern:
+--------------
+These pattern ensure us that a class
+has only one instance and provide a 
+global point to acess.
+
+implementing Singleton:
+-> consttuctor should be private
+-> so there will be one function iside the 
+class will help to create instance
+
+Code:
+#include <iostream>
+using namespace std;
+
+class Singleton {
+  // get instance of Singleton public hoga
+public:
+  // mayersApproch : jaha hum getinstance ka andar local instance send kar deta
+  // hai
+  static Singleton &getInstance() {
+    // if instance is not created then create it
+    static Singleton instance;
+    return instance;
+  }
+
+  // private constructor to prevent direct creation of object
+private:
+  Singleton() { cout << "object is Created" << endl; }
+
+  // copy constructor and assignment operator are deleted
+  // no one can call the copyconst and can't copy it
+  Singleton(const Singleton &) = delete;
+  Singleton &operator=(const Singleton &) = delete;
+};
+
+int main() {
+  Singleton &inst = Singleton::getInstance();
+
+  return 0;
+}
+

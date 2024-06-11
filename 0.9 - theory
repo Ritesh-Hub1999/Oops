@@ -2,8 +2,8 @@ Tempelate:
 ---------
 Templates provide a mechanism for writing generic,
 type-safe, and efficient code. They enhance code
-reusability by allowing the same code to work with
-different types
+reusability and follow a DRY principle.
+We can say class is also a template
 
 Ex: Function
 #include <iostream>

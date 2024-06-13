@@ -1,3 +1,10 @@
+Macro:
+---------
+macros are a feature of the preprocessor and
+are used to define constant values, functions,
+or blocks of code that can be reused throughout 
+a program. Macros are defined using the #define 
+
 Tempelate:
 ---------
 Templates provide a mechanism for writing generic,

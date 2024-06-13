@@ -104,6 +104,14 @@ What is virtual keyword?
 The virtual keyword is used to modify a method, 
 allow it to be overridden in a derived class.
 
+Virtual Destructor:
+------------
+A virtual destructor is a special form of
+destructor that is declared as virtual in a base class.
+
+Making base class destructor virtual guarantees that the
+object of derived class is destructed properly,
+
 vTable:
 -------
 It is a table that contains the memory addresses

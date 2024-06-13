@@ -1,0 +1,177 @@
+What is IPC ?
+->IPC is Inter-process Communication. 
+IPC is important for sharing data between
+processes, ensuring data consistency, and
+coordinating actions in a multi-process 
+application.
+
+Pipes -: 
+Anonymous Pipes: Used for communication 
+between related processes (parent and
+child).
+Named Pipes: Allow communication between
+unrelated processes and can be used over
+a network.
+
+Message Queues-: Allow processes to send and 
+receive messages in a queue. They support 
+asynchronous communication and are suitable 
+for complex messaging requirements.
+
+Shared Memory-: Provides a region of memory that 
+multiple processes can access. It is the fastest
+form of IPC since processes directly read and
+write to memory, but requires synchronization 
+mechanisms like semaphores to prevent race conditions.
+
+Sockets-: Provide communication between processes over
+a network. They support various communication protocols
+like TCP and UDP and can be used for both inter-process 
+and inter-machine communication.
+
+TCP and UCP:
+------------
+TCP (Transmission Control Protocol) :- It's a 
+connection-oriented protocol, meaning a connection
+is established and maintained until the applications
+at each end have finished exchanging messages.
+It's Reliable Reliable, guarantees delivery and order
+
+User Datagram Protocol (UDP) :- t does not establish a 
+connection before sending data and does not guarantee 
+that data packets will arrive in order or even at all.
+Unreliable, no guarantees on delivery or order
+
+What are the differences between a pipe and a socket?
+------------------------------------------
+Answer: Pipes are used for communication between related 
+processes (parent-child) on the same machine and are 
+unidirectional by default. Sockets are more versatile, 
+allowing bidirectional communication between unrelated 
+processes and across different machines over a network.
+
+Explain the difference between named and unnamed pipes.
+---------------------------------------------------
+Answer: Named pipes (FIFOs) have a name in the file system
+and can be used for communication between unrelated processes. 
+Unnamed pipes are used for communication between related processes (e.g., parent and child).
+
+How would you handle synchronization issues in shared memory?
+------------------------------------------------------
+Answer: Use synchronization mechanisms like semaphores or
+mutexes to control access to the shared memory segment and 
+prevent race conditions.
+
+What are the typical issues faced with IPC and how can they be mitigated?
+-------------------------------------------------------------
+Answer: Common issues include race conditions, deadlocks, and data
+consistency problems. They can be mitigated by using proper
+synchronization techniques, careful design of communication 
+protocols, and thorough testing.
+
+How would you implement communication between two processes using pipes in C++?
+-------------------------------------------------------------------------
+Answer:using pipe(), fork(), write(), and read() system calls
+creating a pipe, forking a child process, and using the pipe's
+file descriptors for reading and writing.
+
+#include <iostream>
+#include <unistd.h>
+#include <cstring>
+
+int main() {
+    int fd[2];
+    if (pipe(fd) == -1) {
+        std::cerr << "Pipe failed" << std::endl;
+        return 1;
+    }
+
+    pid_t pid = fork();
+    if (pid == -1) {
+        std::cerr << "Fork failed" << std::endl;
+        return 1;
+    }
+
+    if (pid == 0) { // Child process
+        close(fd[1]); // Close writing end
+        char buffer[100];
+        read(fd[0], buffer, 100);
+        std::cout << "Child read: " << buffer << std::endl;
+        close(fd[0]);
+    } else { // Parent process
+        close(fd[0]); // Close reading end
+        const char* msg = "Hello from parent";
+        write(fd[1], msg, strlen(msg) + 1);
+        close(fd[1]);
+        wait(NULL); // Wait for child
+    }
+    return 0;
+}
+
+#include <iostream>
+#include <unistd.h>
+#include <cstring>
+
+int main() {
+    int fd[2];
+    if (pipe(fd) == -1) {
+        std::cerr << "Pipe failed" << std::endl;
+        return 1;
+    }
+
+    pid_t pid = fork();
+    if (pid == -1) {
+        std::cerr << "Fork failed" << std::endl;
+        return 1;
+    }
+
+    if (pid == 0) { // Child process
+        close(fd[1]); // Close writing end
+        char buffer[100];
+        read(fd[0], buffer, 100);
+        std::cout << "Child read: " << buffer << std::endl;
+        close(fd[0]);
+    } else { // Parent process
+        close(fd[0]); // Close reading end
+        const char* msg = "Hello from parent";
+        write(fd[1], msg, strlen(msg) + 1);
+        close(fd[1]);
+        wait(NULL); // Wait for child
+    }
+    return 0;
+}
+
+Write a simple C++ program using shared memory.
+-------------------------------------
+Answer: Describe creating shared memory with shmget(), 
+attaching with shmat(), and using semaphores for
+synchronization.
+
+#include <iostream>
+#include <sys/ipc.h>
+#include <sys/shm.h>
+#include <sys/types.h>
+#include <sys/wait.h>
+#include <unistd.h>
+
+int main() {
+    key_t key = ftok("shmfile", 65);
+    int shmid = shmget(key, 1024, 0666 | IPC_CREAT);
+    char *str = (char*) shmat(shmid, (void*)0, 0);
+
+    pid_t pid = fork();
+
+    if (pid == 0) { // Child process
+        str = (char*) shmat(shmid, (void*)0, 0);
+        std::cout << "Data read from memory: " << str << std::endl;
+        shmdt(str);
+    } else { // Parent process
+        str = (char*) shmat(shmid, (void*)0, 0);
+        std::string message = "Hello from parent";
+        memcpy(str, message.c_str(), message.size() + 1);
+        wait(NULL);
+        shmdt(str);
+        shmctl(shmid, IPC_RMID, NULL);
+    }
+    return 0;
+}

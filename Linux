@@ -1,0 +1,165 @@
+Basic Questions
+------------
+1)What is Linux? Explain its architecture.
+
+Linux is an open-source operating system 
+based on Unix. Its architecture includes 
+the kernel, system libraries, system utilities,
+and user applications. The kernel handles 
+core system tasks like memory management,
+process management, and hardware communication.
+
+2) How do you list files in a directory?
+
+You can list files using the ls command.
+
+3)Explain the difference between ls and ls -l.
+
+ls lists files and directories in the current
+directory. ls -l provides a detailed listing,
+including file permissions, number of links,
+owner, group, file size, and modification time.
+
+4)What are inodes in Linux?
+
+Inodes are data structures that
+store information about files and 
+directories, such as their size, 
+owner, permissions, and disk location.
+
+5) How do you check disk usage in Linux?
+
+You can use the du command to check 
+disk usage of files and directories, 
+and df to check available and used disk 
+space on mounted filesystems.
+
+6) Explain the purpose of grep command. Provide an example.
+
+grep searches for patterns in files.
+Example: grep "pattern" filename searches for
+"pattern" in filename.
+
+7) How do you find a process ID (PID) in Linux?
+
+Use the ps command, for example, ps aux | grep process_name.
+
+8) What is the difference between ps and top?
+
+ps provides a snapshot of current processes. 
+top provides a dynamic, real-time view of 
+running processes and their resource usage.
+
+9) How do you set file permissions in Linux?
+
+Use the chmod command. Example: chmod 755 
+filename sets read, write, and execute permissions
+for the owner, and read and execute permissions 
+for group and others.
+
+10) What is a symbolic link in Linux? How do
+you create one?
+
+A symbolic link is a file that points to another file or 
+directory. Create one using ln -s target link_name.
+
+11) What are the different types of file permissions in Linux?
+
+The three types of permissions are read (r), write (w),
+and execute (x). These can be set for the file owner,
+group, and others.
+
+12) Explain the process of handling signals in Linux.
+
+Signals are used to communicate with processes. 
+They can be handled by defining signal handlers 
+in the program using the signal() system call.
+
+13)How do you schedule a job in Linux using cron?
+
+Edit the crontab file using crontab -e and add
+a line with the schedule and command.
+Example: 0 5 * * * /path/to/script runs a script daily at 5 AM.
+
+14) What is the difference between hard link and soft link?
+
+A hard link is an additional name for an existing file, 
+sharing the same inode. A soft (symbolic) link is
+a pointer to another file or directory.
+
+15) Explain the concept of environment variables in Linux.
+
+Environment variables are dynamic values that affect
+the processes running on a system. 
+Examples include PATH, HOME, and USER.
+
+16) How do you use awk in Linux? Provide an example.
+
+awk is a programming language for pattern scanning
+and processing. Example: awk '{print $1}' 
+file prints the first column of each line in file.
+
+17) Explain how to use sed for text manipulation.
+
+sed is a stream editor for filtering and transforming 
+text. Example: sed 's/old/new/g' file replaces all
+occurrences of "old" with "new" in file.
+
+18) How do you check open ports in Linux?
+
+Use the netstat -tuln, ss -tuln, or lsof -i commands.
+
+19) Explain the difference between TCP and UDP.
+
+TCP (Transmission Control Protocol) is connection-oriented 
+and ensures reliable data transfer. 
+
+UDP (User Datagram Protocol) is connectionless and
+does not guarantee delivery.
+
+20)How do you check memory usage in Linux?
+
+Use the free command or top/htop for a real-time view.
+
+21) What are iptables? How do you configure them?
+
+iptables is a firewall tool for packet filtering and NAT. 
+Configure it using commands like iptables -A, iptables -D, 
+and saving rules with iptables-save.
+
+21) Describe the process of mounting a filesystem in Linux.
+
+Use the mount command. Example: mount /dev/sda1 /mnt mounts the filesystem on /dev/sda1 to /mnt.
+
+Performance and Optimization
+
+22) How do you monitor system performance in Linux?
+
+Use tools like top, htop, vmstat, iostat, and sar.
+
+23) Explain the purpose of nice and renice.
+
+nice sets the priority of a process when 
+it is started.
+
+renice changes the priority of an already running process.
+
+24) What are cgroups and how are they used in Linux?
+
+cgroups (control groups) limit, account, and isolate 
+resource usage of processes. They are configured through
+the /sys/fs/cgroup filesystem or tools like cgcreate and cgexec.
+
+25) How do you optimize a Linux system for performance?
+
+Methods include tuning kernel parameters, optimizing 
+startup services, using performance monitoring tools,
+and configuring disk I/O and network settings.
+
+26) Explain the use of vmstat and iostat.
+
+vmstat reports virtual memory statistics. 
+iostat reports CPU and I/O statistics, useful 
+for diagnosing performance issues related to disk I/O.
+
+27) touch Command is use to create,change or modify timestamp of file.

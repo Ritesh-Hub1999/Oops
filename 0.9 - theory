@@ -104,6 +104,12 @@ What is virtual keyword?
 The virtual keyword is used to modify a method, 
 allow it to be overridden in a derived class.
 
+what is virtual function?
+--------------------
+To achive dynamic polymorphism. which is 
+ability to call derived class function 
+using Base class pointer or reference.
+
 Virtual Destructor:
 ------------
 A virtual destructor is a special form of

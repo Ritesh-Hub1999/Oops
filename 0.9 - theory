@@ -332,3 +332,51 @@ int main() {
 
     return 0;
 }
+
+Lvalue and Rvalue References in C++
+-------------------------------
+Lvalue: An lvalue is an expression that 
+refers to a location in memory
+Rvalue: An rvalue is a temporary value
+that doesn't have a persistent memory address
+
+Lvalue references are useful for modifying 
+----------------
+existing objects without creating copies.
+
+Example LValue:
+--------------
+#include <iostream>
+
+void foo(int& x) {  // lvalue reference
+    x = 20;  // Modify the original object
+}
+
+int main() {
+    int a = 10;
+    foo(a);  // Passing an lvalue
+    std::cout << "a = " << a << std::endl;  // Output: a = 20
+    return 0;
+}
+
+Rvalue references are used to capture temporary values.
+--------------
+Example:
+-------
+#include <iostream>
+
+void foo(int&& x) {  // rvalue reference
+    std::cout << "Rvalue received: " << x << std::endl;
+}
+
+int main() {
+    foo(10 + 20);  // Passing an rvalue (10 + 20)
+    return 0;
+}
+
+ Move Semantics
+-------------
+Move semantics allow us to efficiently 
+transfer resources from one object to another
+without performing a full copy. This is done
+by using rvalue references.

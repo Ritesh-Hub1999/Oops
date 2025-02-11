@@ -188,3 +188,97 @@ int main()
     cout << "The cube of 3 is: " << cube(3) << "\n";
     return 0;
 } //Output: The cube of 3 is: 27
+
+What is Token?
+-------------
+ a token is the smallest meaningful unit of
+code that the compiler understands. Tokens
+are the building blocks of a C++ program.
+Keywords – Reserved words that have special
+meanings (e.g., int, return, class, if, while).
+
+Identifiers – Names given to variables, functions,
+and classes (e.g., myVariable, calculateSum).
+
+Literals – Constant values
+(e.g., 42, 3.14, "Hello").
+
+Operators – Symbols that perform operations 
+(e.g., +, -, *, &&, ==).
+
+Punctuators – Special symbols used for syntax 
+(e.g., {}, ;, ,, ()).
+
+Comments – Non-executable text used for code 
+documentation (// single-line, /* multi-line */).
+
+Explain the "Rule of 5" in C++
+------------------------------
+If a class manages resources, it should define these 5 special functions:
+Destructor
+Copy constructor
+Copy assignment operator
+Move constructor
+Move assignment operator
+
+Example:
+#include <iostream>
+
+class MyClass {
+private:
+    int data;  // Simple integer (no dynamic allocation)
+
+public:
+    // Constructor
+    MyClass(int value = 0) : data(value) {}
+
+    // Destructor (Not really needed, but included for completeness)
+    ~MyClass() {}
+
+    // Copy Constructor
+    MyClass(const MyClass& other) : data(other.data) {}
+
+    // Copy Assignment Operator
+    MyClass& operator=(const MyClass& other) {
+        if (this != &other) {  // Prevent self-assignment
+            data = other.data;
+        }
+        return *this;
+    }
+
+    // Move Constructor (Same as copy constructor in this case)
+    MyClass(MyClass&& other) noexcept : data(other.data) {
+        other.data = 0;  // Optional: Reset source object
+    }
+
+    // Move Assignment Operator (Same as copy assignment in this case)
+    MyClass& operator=(MyClass&& other) noexcept {
+        if (this != &other) {
+            data = other.data;
+            other.data = 0;  // Optional: Reset source object
+        }
+        return *this;
+    }
+
+    // Function to display value
+    void show() const {
+        std::cout << "Value: " << data << std::endl;
+    }
+};
+
+int main() {
+    MyClass obj1(10);
+    MyClass obj2 = obj1;  // Calls Copy Constructor
+    MyClass obj3;
+    obj3 = obj1;  // Calls Copy Assignment Operator
+
+    MyClass obj4 = std::move(obj1);  // Calls Move Constructor
+    MyClass obj5;
+    obj5 = std::move(obj2);  // Calls Move Assignment Operator
+
+    obj3.show();
+    obj4.show();
+    obj5.show();
+
+    return 0;
+}

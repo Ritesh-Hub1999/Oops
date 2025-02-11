@@ -31,30 +31,47 @@ int main(){
 
 overriding/Dynamic/Late Binding:
 --------------------
-#include<iostream>
-using namespace std;
+#include <iostream>
 
-class Animal{
+class Animal {
 public:
-  int age;
-  int weight;
+    // Virtual function
+    virtual void sound() {
+        std::cout << "Animal makes a sound!" << std::endl;
+    }
 
-  void Speak(){
-    cout<<"Animal is Barking"<<endl;
-  }
+    virtual ~Animal() {}  // Virtual destructor for proper cleanup
 };
 
-class Human{
+class Dog : public Animal {
 public:
-  void speak(){
-    cout<<"Human is speaking"<<endl;
-  }
+    // Overriding the base class function
+    void sound() override {
+        std::cout << "Dog barks!" << std::endl;
+    }
 };
 
-int main(){
-  Human obj1;
-  obj1.speak();
+class Cat : public Animal {
+public:
+    // Overriding the base class function
+    void sound() override {
+        std::cout << "Cat meows!" << std::endl;
+    }
+};
+
+int main() {
+    Animal* animal1 = new Dog();  // Base class pointer, pointing to derived class object
+    Animal* animal2 = new Cat();
+
+    animal1->sound();  // Calls Dog's sound() at runtime
+    animal2->sound();  // Calls Cat's sound() at runtime
+
+    delete animal1;
+    delete animal2;
+
+    return 0;
 }
+
 
 virtual keyword sa bhi achive kr skta hai
 Dynamic poly

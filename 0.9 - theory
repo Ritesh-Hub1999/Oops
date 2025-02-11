@@ -282,3 +282,53 @@ int main() {
 
     return 0;
 }
+
+What is a Namespace in C++?
+---------------------------
+A namespace in C++ is used to group related
+functions, variables, and classes to avoid
+name conflicts.
+
+Example:
+-------
+#include <iostream>
+
+// First namespace
+namespace A {
+    void display() {
+        std::cout << "Hello from Namespace A" << std::endl;
+    }
+}
+
+// Second namespace
+namespace B {
+    void display() {
+        std::cout << "Hello from Namespace B" << std::endl;
+    }
+}
+
+int main() {
+    A::display();  // Calls function from namespace A
+    B::display();  // Calls function from namespace B
+
+    return 0;
+}
+
+What is an enum in C++?
+-----------------------
+An enum (enumeration) is a user-defined type that
+assigns names to a set of integer values, making
+code more readable and maintainable.
+
+Code:
+-----
+#include <iostream>
+
+enum Color { RED, GREEN, BLUE };  // RED = 0, GREEN = 1, BLUE = 2 (default values)
+
+int main() {
+    Color myColor = GREEN;  // Assigning an enum value
+    std::cout << myColor << std::endl;  // Output: 1
+
+    return 0;
+}

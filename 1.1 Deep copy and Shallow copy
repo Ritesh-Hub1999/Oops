@@ -37,66 +37,38 @@ the other constructors, as well.
 
 Shallow Copy Code:
 -----
-//yaha pa humna hero 1 ka hi name chage
-kia tha and hero 2 ka bhi name 
-change hogaya haiyahi hai shallow copy.
-
-#include<iostream>
-#include <cstring>
-using namespace std;
-
 #include <iostream>
-#include <cstring>
-using namespace std;
 
-class pubg{
-private:
-  int health;
-
+class ShallowCopy {
 public:
-  char *name;
-  char level;
+int* data;
 
-public:
-  pubg(){
-    name = new char[100];
-  }
+// Constructor
+ShallowCopy(int value) {
+    data = new int(value);  // Dynamically allocate memory
+}
 
-  void setHealth(int health){
-    this->health = health;
-  }
+// Copy Constructor (Shallow Copy: Copies pointer, not data)
+ ShallowCopy(const ShallowCopy& other) {
+data = other.data;  // Both objects now share the same memory!
+}
 
-  void setLevel(char level){
-    this->level = level;
-  }
-  void setName(char name[]){
-    strcpy(this->name,name);
-  }
+    // Destructor
+ ~ShallowCopy() {
+        delete data;  // When multiple objects delete the same memory, it causes a crash!
+ }
 
-  void print(){
-    cout<<"Player name is:"<<name<<endl;
-    cout<<"Player is in level:"<<level<<endl;
-    cout<<"Player health is:"<<health<<endl;
-    cout<<endl;
-  }
+void show() { std::cout << "Value: " << *data << std::endl; }
 };
 
-int main(){
-  pubg player1;
-  player1.setHealth(10);
-  player1.setLevel('A');
-  char name[8] = "Dexture";
-  player1.setName(name);
-  player1.print();
-  
-  //using default copy constructor;
-  pubg player2(player1);
-  player2.print();
+int main() {
+ShallowCopy obj1(10);
+ShallowCopy obj2 = obj1;  // Calls Shallow Copy Constructor
 
-  player1.name[0]='R';
-  player1.print();
-  player2.print();
-  
+obj1.show();
+obj2.show();
+
+return 0;  // Both objects try to delete the same memory → CRASH!
 }
 
  
@@ -105,62 +77,36 @@ Deep Copy:
 //deep copy ka case mai new array banaya
 
 #include <iostream>
-#include <cstring>
-using namespace std;
 
-class pubg{
-private:
-  int health;
-
+class DeepCopy {
 public:
-  char *name;
-  char level;
+    int* data;
 
-public:
-  pubg(){
-    name = new char[100];
-  }
-  //creating Deep copy
-  //copy constructor
-  pubg(pubg& temp) {
-    char *ch = new char[strlen(temp.name) + 1];
-    strcpy(ch, temp.name);
-    this->name = ch;
-    cout << "Copy constructor called" << endl;
-    this->health = temp.health;
-    this->level = temp.level;
-  }
-  void setHealth(int health){
-    this->health = health;
-  }
+    // Constructor
+DeepCopy(int value) {
+data = new int(value);  // Allocate memory
+ }
 
-  void setLevel(char level){
-    this->level = level;
-  }
-  void setName(char name[]){
-    strcpy(this->name,name);
-  }
+// Copy Constructor (Deep Copy: Allocates new memory and copies the value)
+ DeepCopy(const DeepCopy& other) {
+data = new int(*other.data);  // Allocate new memory and copy value
+}
 
-  void print(){
-    cout<<"Player name is:"<<name<<endl;
-    cout<<"Player is in level:"<<level<<endl;
-    cout<<"Player health is:"<<health<<endl;
-    cout<<endl;
-  }
+    // Destructor
+    ~DeepCopy() {
+        delete data;  // Each object deletes its own memory safely
+    }
+
+    void show() { std::cout << "Value: " << *data << std::endl; }
 };
 
-int main(){
-  pubg player1;
-  player1.setHealth(10);
-  player1.setLevel('A');
-  char name[8] = "Dexture";
-  player1.setName(name);
-  player1.print();
-  pubg player2(player1);
-  player2.print();
+int main() {
+    DeepCopy obj1(10);
+    DeepCopy obj2 = obj1;  // Calls Deep Copy Constructor
 
-  player1.name[0]='R';
-  player1.print();
-  player2.print();
-  
+    obj1.show();
+    obj2.show();
+
+    return 0;  // No crash! Each object has its own copy of data.
 }
+

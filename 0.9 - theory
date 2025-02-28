@@ -130,11 +130,17 @@ public:
 };
 
 int main(){
-    //Base *b = new Derived();
-    //b->func();
-    Derived d;
-    Base &b = d;
-    b.func();
+    //agar base class ka ptr hai derived class ka obj sa point kara dia tho func run karunga tho base class ka hoga because of late binding
+    
+    // agar humna base class ka pointer banaya and drived class sa point kara dia tho hum bas base class ka DM and DF access kar painga
+
+    Base* base_class_ptr;
+    
+    Base base_Obj;
+    Derived derived_obj;
+    
+    base_class_ptr = &derived_obj;
+    base_class_ptr->func();
 }
 Note: if we dont put virtual func it will
 going to call base func only
